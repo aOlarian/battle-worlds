@@ -35,11 +35,12 @@ jobs:
       - name: Capture rendered gameplay
         run: |
           mkdir -p gameplay
-          export BATTLE_DEBUG=shots BATTLE_DEBUG_OUT="$PWD/gameplay"
+          export BATTLE_DEBUG=shots BATTLE_DEBUG_OUT=gameplay
           export XDG_CONFIG_HOME="$RUNNER_TEMP/battle-worlds-config"
           export BATTLE_DEBUG_VIEWS='plaza:0,0,18,0.55,0.32,16;coast:20,0,45,0.75,0.35,22'
           xvfb-run -a -s '-screen 0 1280x800x24' ./battle-worlds
-          test -s gameplay/plaza.png && test -s gameplay/coast.png
+          test -s gameplay/plaza.png
+          test -s gameplay/coast.png
           export BATTLE_REALM=dino BATTLE_DEBUG_VIEWS='dinosaur-world:0,0,16,0.65,0.34,20'
           xvfb-run -a -s '-screen 0 1280x800x24' ./battle-worlds
           test -s gameplay/dinosaur-world.png
