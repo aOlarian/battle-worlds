@@ -19,6 +19,14 @@ Download the Windows x64 installer from Releases and open Battle Worlds from Sta
 
 Use **WASD** to move, the mouse to look, **Space** to jump and **Esc** to open the pause menu. Follow the on-screen instructions to select an island and unlock its next world.
 
+## Gameplay screenshots
+
+![Exploring Sun Harbor](assets/screenshots/coast.png)
+
+![The central plaza](assets/screenshots/plaza.png)
+
+![The Monster Hotel world at night](assets/screenshots/monster-world.png)
+
 ## Build
 
 Run `go test ./...` and `go build -trimpath -o battle-worlds.exe .` with Go 1.26 or newer on Windows. Audio assets are embedded. See [audio credits](assets/sfx/CREDITS.txt) for their sources and terms.
