@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"os"
+	"path/filepath"
 	"strings"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
@@ -32,23 +33,27 @@ func romanianCodepoints() []rune {
 
 func (g *Game) LoadFonts() {
 	cps := romanianCodepoints()
-	if fileExists("C:/Windows/Fonts/segoeui.ttf") {
-		g.Font = rl.LoadFontEx("C:/Windows/Fonts/segoeui.ttf", 64, cps)
-		g.HasFont = g.Font.BaseSize > 0
-		if g.HasFont {
-			rl.SetTextureFilter(g.Font.Texture, rl.FilterBilinear)
-		}
-	}
-	if fileExists("C:/Windows/Fonts/segoeuib.ttf") {
-		g.FontBold = rl.LoadFontEx("C:/Windows/Fonts/segoeuib.ttf", 72, cps)
-		if g.FontBold.BaseSize > 0 {
-			rl.SetTextureFilter(g.FontBold.Texture, rl.FilterBilinear)
-		} else {
-			g.FontBold = g.Font
-		}
-	} else {
+	fonts := filepath.Join(os.Getenv("WINDIR"), "Fonts")
+	g.Font = loadInterfaceFont(cps, 64, filepath.Join(fonts, "segoeui.ttf"), "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")
+	g.HasFont = g.Font.BaseSize > 0
+	g.FontBold = loadInterfaceFont(cps, 72, filepath.Join(fonts, "segoeuib.ttf"), "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
+	if g.FontBold.BaseSize == 0 {
 		g.FontBold = g.Font
 	}
+}
+
+func loadInterfaceFont(codepoints []rune, size int32, files ...string) rl.Font {
+	for _, file := range files {
+		if !fileExists(file) {
+			continue
+		}
+		font := rl.LoadFontEx(file, size, codepoints)
+		if font.BaseSize > 0 {
+			rl.SetTextureFilter(font.Texture, rl.FilterBilinear)
+			return font
+		}
+	}
+	return rl.Font{}
 }
 
 func (g *Game) font(bold bool) rl.Font {

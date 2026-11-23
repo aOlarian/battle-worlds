@@ -15,7 +15,7 @@ Explore seven themed 3D worlds, unlock new abilities and ride a flying train bet
 
 ## Play on Windows
 
-Download the Windows x64 ZIP from Releases, extract it to a folder and open **battle-worlds.exe**. An OpenGL 3.3-capable graphics driver is required. The interface is in Romanian.
+Download the Windows x64 installer from Releases and open Battle Worlds from Start. For a portable copy, extract the ZIP and open **battle-worlds.exe**. An OpenGL 3.3-capable graphics driver is required. The interface is in Romanian.
 
 Use **WASD** to move, the mouse to look, **Space** to jump and **Esc** to open the pause menu. Follow the on-screen instructions to select an island and unlock its next world.
 
