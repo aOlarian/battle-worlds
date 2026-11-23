@@ -41,9 +41,9 @@ jobs:
           xvfb-run -a -s '-screen 0 1280x800x24' ./battle-worlds
           test -s gameplay/plaza.png
           test -s gameplay/coast.png
-          export BATTLE_REALM=dino BATTLE_DEBUG_VIEWS='dinosaur-world:0,0,16,0.65,0.34,20'
+          export BATTLE_REALM=monstri BATTLE_DEBUG_VIEWS='monster-world:0,0,28,0.65,0.50,40'
           xvfb-run -a -s '-screen 0 1280x800x24' ./battle-worlds
-          test -s gameplay/dinosaur-world.png
+          test -s gameplay/monster-world.png
       - uses: actions/upload-artifact@v4
         with:
           name: gameplay
