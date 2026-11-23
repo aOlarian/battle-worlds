@@ -1,0 +1,50 @@
+name: Gameplay verification
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '**.go'
+      - 'go.mod'
+      - 'go.sum'
+      - 'assets/sfx/**'
+      - '.github/workflows/gameplay.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      LIBGL_ALWAYS_SOFTWARE: '1'
+      MESA_GL_VERSION_OVERRIDE: '3.3'
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb xauth libgl1-mesa-dev libx11-dev libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev libxxf86vm-dev libxkbcommon-dev
+      - run: go test -tags x11 ./...
+      - run: go build -tags x11 -trimpath -o battle-worlds .
+      - name: Capture rendered gameplay
+        run: |
+          mkdir -p gameplay
+          export BATTLE_DEBUG=shots BATTLE_DEBUG_OUT="$PWD/gameplay"
+          export XDG_CONFIG_HOME="$RUNNER_TEMP/battle-worlds-config"
+          export BATTLE_DEBUG_VIEWS='plaza:0,0,18,0.55,0.32,16;coast:20,0,45,0.75,0.35,22'
+          xvfb-run -a -s '-screen 0 1280x800x24' ./battle-worlds
+          test -s gameplay/plaza.png && test -s gameplay/coast.png
+          export BATTLE_REALM=dino BATTLE_DEBUG_VIEWS='dinosaur-world:0,0,16,0.65,0.34,20'
+          xvfb-run -a -s '-screen 0 1280x800x24' ./battle-worlds
+          test -s gameplay/dinosaur-world.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gameplay
+          path: gameplay/*.png
+          if-no-files-found: error
