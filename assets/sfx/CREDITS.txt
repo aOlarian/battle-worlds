@@ -1,0 +1,21 @@
+Sunetele din Battle Worlds 4.1 (toate cu licenta CC0 = domeniu public, se pot folosi liber)
+Descarcate pe 2026-11-13.
+
+Kenney (www.kenney.nl), CC0:
+  - Impact Sounds: pasi pe iarba / beton / lemn / zapada (folosit pentru nisip), lovituri,
+    aterizare, ciocan pe lemn, durere
+  - RPG Audio: sabia (knifeSlice, drawKnife), monede, haine (saritura), clic metalic
+  - Sci-Fi Sounds: pistolul laser (laserSmall), bila de foc a inamicilor (laserRetro),
+    vuietul din tunel (spaceEngineLow, incetinit), avionul (spaceEngineSmall)
+  - Interface Sounds: clic, meniu, eroare, ding (lift), salut, piesă de construcție (drop)
+  - Music Jingles: victorie, nivel nou, constructie gata, realizare, infrangere, alerta
+  Licenta: assets/sfx/LICENSE-kenney.txt
+
+OpenGameArt.org, CC0:
+  - "40 CC0 water / splash / slime SFX" (rubberduck): plescaituri, inot
+  - "Beach Ocean Waves" (jasinski, prin Freesound 18363): valurile de la mal
+  - "Ambient Bird Sounds" (isaiah658): pasarile de pe insule
+  - "Boing" : trambulina
+  - "100 CC0 SFX" (rubberduck): arcul trambulinei
+
+Generate in joc (cod): claxonul masinilor si zgomotul masinii care trece.
